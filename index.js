@@ -71,10 +71,10 @@ if(employeeType === "none"){
   isTeamComplete = true;
 } else {
   if (employeeType === 'engineer'){
-    return createEngineer();
+    return newEngineer();
   }
   if (employeeType === 'intern'){
-    return createIntern();
+    return newIntern();
   }
 }
 
@@ -108,12 +108,54 @@ const newEngineer = async () => {
 
   // engineer answers are generated from user input
   const engineerAnswers = await inquirer.prompt(engineerQuestions);
+  const engineer = new Engineer(engineerAnswers);
+
+  employees.push(engineer);
+
+  // Create Intern
+
+  const newIntern = async () => {
+    const internQuestions = [
+      {
+        type: 'input',
+        message: "Enter Intern name:",
+        name: 'name',
+        validate: validateInput,
+      },
+      {
+        type: 'input',
+        message: "Enter Intern ID number:",
+        name: 'id',
+        validate: validateInput,
+      },
+      {
+        type: 'input',
+        message: 'Enter Intern email:',
+        name: 'email',
+        validate: validateInput,
+      },
+      {
+        type: 'input',
+        message: 'Enter Intern school name:',
+        name: 'school',
+        validate: validateInput,
+      },
+    ];
+    // Answers input for intern will be generated from user input
+    const internAnswers = await inquirer.prompt(internQuestions);
+
+    const intern = new Intern(internAnswers);
+
+    employeeQuestions.push (intern);
+  }
 }
 
-const completeDirectory = () => {
-  console.log('Directory completed');
-  fs.writeFileSync('index.html', createTeamProfileGenerator, 'utf-8')
-}
+innit();
+
+const HTML = generateHTML(employees);
+  fs.writeFileSync('teams.html', createTeamProfileGenerator, HTML, 'utf-8')
+  console.log("HTML file has been created");
+
 
 questionsManager();
 
