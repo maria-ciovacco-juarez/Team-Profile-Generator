@@ -17,6 +17,39 @@ const validateInput = (userInput)=> {
 };
 
 // Array of questions for terminal/CLI
+const questionsManager = () => {
+  return inquirer.prompt([
+    {
+      type: 'input',
+      name: 'managerName',
+      message: 'Please enter Manager name:',
+      validate: validateInput,
+    },
+    {
+      type: 'input',
+      name: 'managerID',
+      message: "Please enter your Manager Employee ID:",
+      validate: validateInput,
+    },
+    {
+      type: 'input',
+      name: 'managerEmail',
+      message: 'Please enter your Manager email address:',
+      validate: validateInput,
+    },
+    {
+      type: 'input',
+      name: 'managerOfficeNumber',
+      message: 'Please enter your office number',
+      validate: validateInput,
+    },
+  ]).then(answers => {
+    const manager = new Manager(answers.managerName, answers.managerID, answers.managerEmail, answers.managerOfficeNumber)
+    employees.push(manager);
+    promptEmployeeMenu()
+  })
+}
+
 const employeeQuestions=[
   {
     type: 'list',
@@ -45,9 +78,42 @@ if(employeeType === "none"){
   }
 }
 
+const newEngineer = async () => {
+  const engineerQuestions = [
+    {
+      type: "input",
+      message: "Enter Engineer name:",
+      name: "name",
+      validate: validateInput,
+    },
+    {
+      type: 'input',
+      message: "Enter Engineer ID number:",
+      name: 'id',
+      validate: validateInput,
+    },
+    {
+      type: "input",
+      message: "Enter Engineer email address:",
+      name: 'email',
+      validate: validateInput,
+    },
+    {
+      type: 'input',
+      message: "Enter Engineer github user:",
+      name: 'github',
+      validate: validateInput,
+    },
+  ];
+
+  // engineer answers are generated from user input
+  const engineerAnswers = await inquirer.prompt(engineerQuestions);
+}
+
 const completeDirectory = () => {
   console.log('Directory completed');
   fs.writeFileSync('index.html', createTeamProfileGenerator, 'utf-8')
 }
 
 questionsManager();
+
