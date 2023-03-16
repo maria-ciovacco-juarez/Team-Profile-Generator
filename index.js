@@ -17,3 +17,37 @@ const validateInput = (userInput)=> {
 };
 
 // Array of questions for terminal/CLI
+const employeeQuestions=[
+  {
+    type: 'list',
+    message: "Select employee type you wish to add:",
+    name: "employeeType",
+    choices: [
+      {name: 'Engineer'},
+      {name: 'Intern'},
+      {name: 'None'},
+    ],
+  },
+];
+
+const{employeeType} = () => {
+  return inquirer.prompt(employeeQuestions);
+}
+
+if(employeeType === "none"){
+  isTeamComplete = true;
+} else {
+  if (employeeType === 'engineer'){
+    return createEngineer();
+  }
+  if (employeeType === 'intern'){
+    return createIntern();
+  }
+}
+
+const completeDirectory = () => {
+  console.log('Directory completed');
+  fs.writeFileSync('index.html', createTeamProfileGenerator, 'utf-8')
+}
+
+questionsManager();
