@@ -1,39 +1,51 @@
-function generateHTML(data) {
-  return `
-  # ${data.title}
+const fs =require("fs");
 
-  ## Table of Contents
-  - [Project description](#Description)
-  - [Usage](#Usage)
-  - [Installation](#Installation)
-  - [Contribution](#Contribution)
-  - [Questions](#Questions)
-  - [License](#License)
-  - [Tests](#Tests)
+const path = require("path");
 
-  ## Description
-  ${data.description}
+const templatesDir = path.resolve(__dirname, "../templates");
 
-  ## Usage
-  ${data.usage}
+const generateHTML = (employees) => {
+  const HTML=[];
 
-  ## Installation
-  ${data.installation}
+  HTML.push (
+    employees.filter((employee) => employee.getRole()=== "Manager")
+    .map((manager) => renderManager(manager))
+  );
+  HTML.push(
+    employees.filter((employee) => employee.getRole()==="Engineer")
+    .map((engineer) => renderEngineer(engineer))
+  );
+  HTML.push (
+    employees.filter((employee) => employee.getRole()==="Intern")
+    .map((intern) => renderIntern(intern))
+  );
 
-  ## Contribution
-  ${data.contribution}
+  console.log(HTML, "generateHTML.js");
 
-  ## Questions
-  ${data.email}
-  [${data.github}](https://github.com/${data.github}/)
+  return renderFullMakrdown(HTML.join(""));
+};
 
-  ## License
-  ${data.license}
+const renderManager = (manager) => {
+  let template = fs.readFileSync(
+    path.resolve(templatesDir, "manager.html"),
+    "utf8"
+  );
+
+  template = replaceTemplates(template, "name", manager.getName());
+  template = replaceTemplates(template, "id", manager.getId());
+  template= replaceTemplates (template, "role", manager.getRole());
+  template = replaceTemplates(template, "email", manager.getEmail());
+  template = replaceTemplates(
+    template,
+    "officeNumber",
+    manager.getOfficeNumber()
   
-  ## Tests
-  ${data.tests}
-`;
+  );
+  render.template;
+};
+
+constrenderEngineer = (engineer) => {
+  let template = fs.readFileSync(
+
+  )
 }
-
-
-module.exports = generateHTML;
