@@ -1,8 +1,7 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 const path = require('path');
-const createTeamProfileGenerator = require("./src/genrateHTML.js");
-
+const generateHTML = require("./src/generateHTML.js");
 const Engineer = require('./lib/engineer.js');
 const Intern = require('./lib/intern.js');
 const Manager = require('./lib/manager.js');
@@ -19,7 +18,7 @@ const validateInput = (userInput) => {
 };
 
 const innit = async () => {
-  await createManager();
+  await questionsManager();
 
   while (!isDirectoryComplete) {
     const employeeQuestions = [
@@ -35,33 +34,32 @@ const innit = async () => {
       },
     ];
 
-    const { employeeTeamMember } = await inquirer.prompt(employeeQuestions);
+    const { employeeType } = await inquirer.prompt(employeeQuestions);
 
-    if (employeeTeamMember === 'none') {
+    if (employeeType === 'None') {
       isDirectoryComplete = true;
     } else {
-      if (employeeTeamMember === "engineer") {
+      if (employeeType === "Engineer") {
         await newEngineer();
       }
-      if (employeeTeamMember === "intern") {
+      if (employeeType === "Intern") {
         await newIntern();
       }
     }
-
   }
 
   const completeDirectory = () => {
     console.log('Directory completed');
-    fs.writeFileSync('index.html', completeDirectory, HTML, createTeamProfileGenerator, (err) => {
+    fs.writeFileSync('index.html', generateHTML(employees), (err) => {
       if (err) {
         console.log(err);
       } else {
         console.log("HTML file created");
       }
-    })
+    });
   }
 
-
+  completeDirectory();
 }
 
 // Array of questions for terminal / CLI
@@ -92,9 +90,9 @@ const questionsManager = () => {
       validate: validateInput,
     },
   ]).then(answers => {
-    const manager = new Manager(answers.managerName, answers.managerID, answers.managerEmail, answers.managerOfficeNumber)
+    const manager = new Manager(answers.managerName, answers.managerId, answers.managerEmail, answers.managerOfficeNumber)
     employees.push(manager);
-    promptEmployeeMenu()
+    promptEmployeeMenu();
 
     questionsManager();
   })
