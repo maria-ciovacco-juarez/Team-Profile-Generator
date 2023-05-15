@@ -1,10 +1,10 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 const path = require('path');
-const generateHTML = require("./src/generateHTML.js");
-const Engineer = require('./lib/Engineer.js');
-const Intern = require('./lib/Intern.js');
-const Manager = require('./lib/Manager.js');
+const generateHTML = require("./src/generateHTML");
+const Engineer = require('./lib/Engineer');
+const Intern = require('./lib/Intern');
+const Manager = require('./lib/Manager');
 const employees = [];
 
 let isDirectoryComplete = false;
@@ -130,7 +130,12 @@ const questionsIntern = () => {
 
 const completeTeam = () => {
   console.log(`Team is complete`);
-  fs.writeFileSync('./dist/teams/.html', generateHTML (employees), "utf-8");
+  fs.writeFileSync('./dist/teams.html', generateHTML (employees), "utf-8");
 
 }
 questionsManager();
+
+
+
+
+module.exports = generateHTML;

@@ -1,30 +1,31 @@
-const fs =require("fs");
-
+const fs = require("fs");
 const path = require("path");
 
 const templatesDir = path.resolve(__dirname, "../templates");
 
-const {generateHTML, createTeamDirectory} = (employees) => {
-  const HTML=[];
+function generateHTML(employees) {
+  const HTML = [];
 
-  HTML.push (
-    employees.filter((employee) => employee.getRole()=== "Manager")
-    .map((manager) => renderManager(manager))
+  HTML.push(
+    ...employees
+      .filter((employee) => employee.getRole() === "Manager")
+      .map((manager) => renderManager(manager))
   );
   HTML.push(
-    employees.filter((employee) => employee.getRole()==="Engineer")
-    .map((engineer) => renderEngineer(engineer))
+    ...employees
+      .filter((employee) => employee.getRole() === "Engineer")
+      .map((engineer) => renderEngineer(engineer))
   );
-  HTML.push (
-    employees.filter((employee) => employee.getRole()==="Intern")
-    .map((intern) => renderIntern(intern))
+  HTML.push(
+    ...employees
+      .filter((employee) => employee.getRole() === "Intern")
+      .map((intern) => renderIntern(intern))
   );
-  console.log(HTML, "generateHTML.js");
 
-  return renderFullMakrdown(HTML.join(""));
-};
+  return renderFullMarkdown(HTML.join(""));
+}
 
-const renderManager = (manager) => {
+function renderManager(manager) {
   let template = fs.readFileSync(
     path.resolve(templatesDir, "manager.html"),
     "utf8"
@@ -32,22 +33,23 @@ const renderManager = (manager) => {
 
   template = replaceTemplates(template, "name", manager.getName());
   template = replaceTemplates(template, "id", manager.getId());
-  template= replaceTemplates (template, "role", manager.getRole());
+  template = replaceTemplates(template, "role", manager.getRole());
   template = replaceTemplates(template, "email", manager.getEmail());
   template = replaceTemplates(
     template,
     "officeNumber",
     manager.getOfficeNumber()
-  
   );
-  return template;
-};
 
-const renderEngineer = (engineer) => {
+  return template;
+}
+
+function renderEngineer(engineer) {
   let template = fs.readFileSync(
-    path.resolve(templates, "engineer.html"),
+    path.resolve(templatesDir, "engineer.html"),
     "utf8"
-  ); 
+  );
+
   template = replaceTemplates(template, "name", engineer.getName());
   template = replaceTemplates(template, "id", engineer.getId());
   template = replaceTemplates(template, "role", engineer.getRole());
@@ -55,36 +57,36 @@ const renderEngineer = (engineer) => {
   template = replaceTemplates(template, "github", engineer.getGithub());
 
   return template;
-  };
+}
 
-  const renderIntern = (intern) => {
-    let template = fs.readFileSync(
-      path.resolve(templatesDir, "intern.html"),
-      "utf8"
-    );
-    template = replaceTemplates(template, "name", intern.getName());
-    template = replaceTemplates(template, "id", intern.getId ());
-    template = replaceTemplates(template, "role", intern.getRole());
-    template = replaceTemplates(template, "email", intern.getEmail());
-    template = replaceTemplates(template, "school", intern.getSchool());
+function renderIntern(intern) {
+  let template = fs.readFileSync(
+    path.resolve(templatesDir, "intern.html"),
+    "utf8"
+  );
 
-    return template;
-  };
+  template = replaceTemplates(template, "name", intern.getName());
+  template = replaceTemplates(template, "id", intern.getId());
+  template = replaceTemplates(template, "role", intern.getRole());
+  template = replaceTemplates(template, "email", intern.getEmail());
+  template = replaceTemplates(template, "school", intern.getSchool());
 
-  const renderFullMarkdown = (HTML) => {
-    let template = fs.readFileSync(
-      path.resolve(templatesDire, "full-markdown.html"),
-      "utf8"
-    );
+  return template;
+}
 
-    return replaceTemplates(template, "team", HTML);
-  };
+function renderFullMarkdown(HTML) {
+  let template = fs.readFileSync(
+    path.resolve(templatesDir, "templates.html"),
+    "utf8"
+  );
 
-  const replaceTemplates = (template, placeholder, value) => {
-    const pattern = new RegExp (`{{${placeholder}}}`, "gm");
+  return replaceTemplates(template, "templates.html", HTML);
+}
 
-    return template.replace(pattern, value);
-  };
+function replaceTemplates(template, placeholder, value) {
+  const pattern = new RegExp(`{{${placeholder}}}`, "gm");
 
-  module.exports = {generateHTML} ;
+  return template.replace(pattern, value);
+}
 
+module.exports = generateHTML;
