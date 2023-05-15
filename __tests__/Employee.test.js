@@ -1,4 +1,4 @@
-const Employee = require("../lib/employee")
+const Employee = require("../lib/Employee")
 
 test("Check if employee is an object", () =>{
   const newEmployee = new Employee ()
@@ -6,8 +6,8 @@ test("Check if employee is an object", () =>{
 })
 
 test ("Check if the name is saved correctly", () => {
-  const newEmployee = new Employee ("Matt")
-  expect (newEmployee.name).toBe("Matt")
+  const newEmployee = new Employee ("Betty")
+  expect (newEmployee.name).toBe("Betty")
 
   
 })
