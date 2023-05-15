@@ -4,7 +4,7 @@ const path = require("path");
 
 const templatesDir = path.resolve(__dirname, "../templates");
 
-const generateHTML = (employees) => {
+const {generateHTML, createTeamDirectory} = (employees) => {
   const HTML=[];
 
   HTML.push (
@@ -19,7 +19,6 @@ const generateHTML = (employees) => {
     employees.filter((employee) => employee.getRole()==="Intern")
     .map((intern) => renderIntern(intern))
   );
-
   console.log(HTML, "generateHTML.js");
 
   return renderFullMakrdown(HTML.join(""));
@@ -87,5 +86,5 @@ const renderEngineer = (engineer) => {
     return template.replace(pattern, value);
   };
 
-  module.exports = generateHTML;
+  module.exports = {generateHTML} ;
 

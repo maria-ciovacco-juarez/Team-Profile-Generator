@@ -2,9 +2,9 @@ const inquirer = require('inquirer');
 const fs = require('fs');
 const path = require('path');
 const generateHTML = require("./src/generateHTML.js");
-const Engineer = require('./lib/engineer.js');
-const Intern = require('./lib/intern.js');
-const Manager = require('./lib/manager.js');
+const Engineer = require('./lib/Engineer.js');
+const Intern = require('./lib/Intern.js');
+const Manager = require('./lib/Manager.js');
 const employees = [];
 
 let isDirectoryComplete = false;
@@ -17,163 +17,120 @@ const validateInput = (userInput) => {
   }
 };
 
-const innit = async () => {
-  await questionsManager();
-
-  while (!isDirectoryComplete) {
-    const employeeQuestions = [
-      {
-        type: 'list',
-        message: "Select employee type you wish to add:",
-        name: "employeeType",
-        choices: [
-          { name: 'Engineer' },
-          { name: 'Intern' },
-          { name: 'None' },
-        ],
-      },
-    ];
-
-    const { employeeType } = await inquirer.prompt(employeeQuestions);
-
-    if (employeeType === 'None') {
-      isDirectoryComplete = true;
-    } else {
-      if (employeeType === "Engineer") {
-        await newEngineer();
-      }
-      if (employeeType === "Intern") {
-        await newIntern();
-      }
-    }
-  }
-
-  const completeDirectory = () => {
-    console.log('Directory completed');
-    fs.writeFileSync('index.html', generateHTML(employees), (err) => {
-      if (err) {
-        console.log(err);
-      } else {
-        console.log("HTML file created");
-      }
-    });
-  }
-
-  completeDirectory();
-}
-
-// Array of questions for terminal / CLI
+//CLI array of questions
 const questionsManager = () => {
   return inquirer.prompt([
-    {
-      type: 'input',
-      name: 'managerName',
-      message: 'Please enter Manager name:',
-      validate: validateInput,
-    },
-    {
-      type: 'input',
-      name: 'managerID',
-      message: "Please enter your Manager Employee ID:",
-      validate: validateInput,
-    },
-    {
-      type: 'input',
-      name: 'managerEmail',
-      message: 'Please enter your Manager email address:',
-      validate: validateInput,
-    },
-    {
-      type: 'input',
-      name: 'managerOfficeNumber',
-      message: 'Please enter your office number',
-      validate: validateInput,
-    },
+      {
+          type: 'input',
+          name: 'managerName',
+          message: 'Please enter manager name.',
+      },
+      {
+          type: 'input',
+          name: 'managerID',
+          message: 'Please enter your manager ID',
+      },
+      {
+          type: 'input',
+          name: 'managerEmail',
+          message: 'Please enter your manager email address',
+      },
+      {
+          type: 'input',
+          name: 'managerOfficeNumber',
+          message: 'Please enter your manager office number',
+      },
+
   ]).then(answers => {
-    const manager = new Manager(answers.managerName, answers.managerId, answers.managerEmail, answers.managerOfficeNumber)
-    employees.push(manager);
-    promptEmployeeMenu();
-
-    questionsManager();
+      const manager = new Manager(answers.managerName, answers.managerID, answers.managerEmail, answers.managerOfficeNumber)
+      employees.push(manager);
+      promptMenu()
   })
+};
+
+const promptMenu = () => {
+  return inquirer.prompt([
+      {
+          type: 'list',
+          name: 'newTeamMember',
+          message: 'Do you want to add a new team member to your team?',
+          choices: ['Engineer', 'Intern', 'My team is complete'] 
+      }])
+      .then(res => {
+          switch (res.newTeamMember) {
+              case "Engineer":
+                  questionsEngineer();
+                  break;
+              case "Intern":
+                  questionsIntern();
+                  break;
+              default:
+                  completeTeam();
+          }
+      });
+};
+
+const questionsEngineer = () => {
+  return inquirer.prompt([
+      {
+          type: 'input',
+          name: 'engineerName',
+          message: 'Please enter the engineer name.',
+      },
+      {
+          type: 'input',
+          name: 'engineerID',
+          message: 'Please enter the engineer ID',
+      },
+      {
+          type: 'input',
+          name: 'engineerEmail',
+          message: 'Please enter the engineer email address',
+      },
+      {
+          type: 'input',
+          name: 'engineerGithub',
+          message: 'Please enter the engineers github username',
+      },
+  ]).then(answers => {
+      const engineer = new Engineer(answers.engineerName, answers.engineerID, answers.engineerEmail, answers.engineerGithub);
+      employees.push(engineer);
+      promptMenu();
+  })
+};
+
+const questionsIntern = () => {
+  return inquirer.prompt([
+      {
+          type: 'input',
+          name: 'internName',
+          message: 'Please enter the intern name.',
+      },
+      {
+          type: 'input',
+          name: 'internID',
+          message: 'Please enter the intern ID',
+      },
+      {
+          type: 'input',
+          name: 'internEmail',
+          message: 'Please enter the intern email address',
+      },
+      {
+          type: 'input',
+          name: 'internSchool',
+          message: 'Please enter the intern school',
+      },
+  ]).then(answers => {
+      const intern = new Intern(answers.internName, answers.internID, answers.internEmail, answers.internSchool);
+      employees.push(intern);
+      promptMenu();
+  })
+};
+
+const completeTeam = () => {
+  console.log(`Team is complete`);
+  fs.writeFileSync('./dist/teams/.html', generateHTML (employees), "utf-8");
+
 }
-
-
-const newEngineer = async () => {
-  const engineerQuestions = [
-    {
-      type: "input",
-      message: "Enter Engineer name:",
-      name: "name",
-      validate: validateInput,
-    },
-    {
-      type: 'input',
-      message: "Enter Engineer ID number:",
-      name: 'id',
-      validate: validateInput,
-    },
-    {
-      type: "input",
-      message: "Enter Engineer email address:",
-      name: 'email',
-      validate: validateInput,
-    },
-    {
-      type: 'input',
-      message: "Enter Engineer github user:",
-      name: 'github',
-      validate: validateInput,
-    },
-  ];
-
-  // engineer answers are generated from user input
-  const engineerAnswers = await inquirer.prompt(engineerQuestions);
-  const engineer = new Engineer(engineerAnswers);
-
-  employees.push(engineer);
-}
-
-// Create Intern
-const newIntern = async () => {
-  const internQuestions = [
-    {
-      type: 'input',
-      message: "Enter Intern name:",
-      name: 'name',
-      validate: validateInput,
-    },
-    {
-      type: 'input',
-      message: "Enter Intern ID number:",
-      name: 'id',
-      validate: validateInput,
-    },
-    {
-      type: 'input',
-      message: 'Enter Intern email:',
-      name: 'email',
-      validate: validateInput,
-    },
-    {
-      type: 'input',
-      message: 'Enter Intern school name:',
-      name: 'school',
-      validate: validateInput,
-    },
-  ];
-  // Answers input for intern will be generated from user input
-  const internAnswers = await inquirer.prompt(internQuestions);
-
-  const intern = new Intern(internAnswers);
-
-  employeeQuestions.push(intern);
-}
-
-
-innit();
-
-
-
-
-
+questionsManager();
