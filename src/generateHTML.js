@@ -1,6 +1,8 @@
 const fs = require("fs");
 const path = require("path");
 
+
+
 const templatesDir = path.resolve(__dirname, "../templates");
 
 function generateHTML(employees) {
@@ -21,8 +23,9 @@ function generateHTML(employees) {
       .filter((employee) => employee.getRole() === "Intern")
       .map((intern) => renderIntern(intern))
   );
-
-  return renderFullMarkdown(HTML.join(""));
+// renderFullMarkdown("hello"
+//   );
+   return renderFullMarkdown(HTML.join(""));
 }
 
 function renderManager(manager) {
@@ -41,6 +44,17 @@ function renderManager(manager) {
     manager.getOfficeNumber()
   );
 
+  //  // Add Bootstrap classes to the template
+  //  template = `<div class="card bg-light mb-3" style="max-width: 18rem;">
+  //  <div class="card-header">${manager.getName()}</div>
+  //  <div class="card-body">
+  //    <h5 class="card-title">${manager.getRole()}</h5>
+  //    <p class="card-text">ID: ${manager.getId()}</p>
+  //    <p class="card-text">Email: <a href="mailto:${manager.getEmail()}">${manager.getEmail()}</a></p>
+  //    <p class="card-text">Office Number: ${manager.getOfficeNumber()}</p>
+  //  </div>
+//  </div>`;
+
   return template;
 }
 
@@ -51,6 +65,7 @@ function renderEngineer(engineer) {
   );
 
   template = replaceTemplates(template, "name", engineer.getName());
+
   template = replaceTemplates(template, "id", engineer.getId());
   template = replaceTemplates(template, "role", engineer.getRole());
   template = replaceTemplates(template, "email", engineer.getEmail());

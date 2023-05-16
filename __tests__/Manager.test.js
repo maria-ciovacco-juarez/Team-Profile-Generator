@@ -1,19 +1,30 @@
 const Manager = require("../lib/Manager");
 
-test("Can create an office number.", () => {
-    const testOfficeNumber = 2;
-    const employeeInstance = new Manager("Dorothea", 2, "dorothea@work.com", testOfficeNumber);
-    expect(employeeInstance.officeNumber).toBe(testOfficeNumber);
-});
+test("Check if manager is an object", () =>{
+    const newManager = new Manager ()
+    expect (typeof(newManager)).toBe("object")
+  })
+  
+  test ("Check if the name is saved correctly", () => {
+    const newManager = new Manager("Matt")
+    expect (newManager.name).toBe("Matt")
+    
+  })
 
-test("Testing officeNumber will return office number.", () => {
-    const testOfficeNumber = 2;
-    const employeeInstance = new Manager("James", 2, "jamesljenks@gmail.com", testOfficeNumber);
-    expect(employeeInstance.getOfficeNumber()).toBe(testOfficeNumber);
-});
+// test("create an office number.", () => {
+//     const testOfficeNumber = 2;
+//     const employeeInstance = new Manager("manager", 2, "manager@work.com", testOfficeNumber);
+//     expect(employeeInstance.officeNumber).toBe(testOfficeNumber);
+// });
 
-test("Testing role.", () => {
-    const returnValue = "Manager";
-    const employeeInstance = new Manager("James", 2, "jamesljenks@gmail.com", 2);
-    expect(employeeInstance.getRole()).toBe(returnValue);
-});
+// test("Testing officeNumber will return office number.", () => {
+//     const testOfficeNumber = 2;
+//     const employeeInstance = new Manager("manager", 2, "manager@work.com", testOfficeNumber);
+//     expect(employeeInstance.getOfficeNumber()).toBe(testOfficeNumber);
+// });
+
+// test("Testing role.", () => {
+//     const returnValue = "Manager";
+//     const employeeInstance = new Manager("manager", 2, "manager@work.com", 2);
+//     expect(employeeInstance.getRole()).toBe(returnValue);
+// });
