@@ -1,5 +1,7 @@
 const Employee = require("../lib/Employee")
 
+// test to pass employee
+
 describe('Employee', () => {
 
   describe('new employee', () => {
