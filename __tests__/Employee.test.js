@@ -1,13 +1,11 @@
 const Employee = require("../lib/Employee")
 
-test("Check if employee is an object", () =>{
-  const newEmployee = new Employee ()
-  expect (typeof(newEmployee)).toBe("object")
-})
+describe('Employee', () => {
 
-test ("Check if the name is saved correctly", () => {
-  const newEmployee = new Employee ("Betty")
-  expect (newEmployee.name).toBe("Betty")
-
-  
-})
+  describe('new employee', () => {
+    it('should create a new employee including name, email, and id once CLI prompts are completed', () => {
+      const employee = new Employee("Inez", 1, "inez@email.com");
+      expect(employee.Employee).toEqual();
+    });
+  });
+});

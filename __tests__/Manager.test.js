@@ -1,30 +1,13 @@
 const Manager = require("../lib/Manager");
 
-test("Check if manager is an object", () =>{
-    const newManager = new Manager ()
-    expect (typeof(newManager)).toBe("object")
-  })
-  
-  test ("Check if the name is saved correctly", () => {
-    const newManager = new Manager("Matt")
-    expect (newManager.name).toBe("Matt")
-    
-  })
+//test to pass for manager
+describe('Manager', () => {
 
-// test("create an office number.", () => {
-//     const testOfficeNumber = 2;
-//     const employeeInstance = new Manager("manager", 2, "manager@work.com", testOfficeNumber);
-//     expect(employeeInstance.officeNumber).toBe(testOfficeNumber);
-// });
-
-// test("Testing officeNumber will return office number.", () => {
-//     const testOfficeNumber = 2;
-//     const employeeInstance = new Manager("manager", 2, "manager@work.com", testOfficeNumber);
-//     expect(employeeInstance.getOfficeNumber()).toBe(testOfficeNumber);
-// });
-
-// test("Testing role.", () => {
-//     const returnValue = "Manager";
-//     const employeeInstance = new Manager("manager", 2, "manager@work.com", 2);
-//     expect(employeeInstance.getRole()).toBe(returnValue);
-// });
+  describe('manager office number', () => {
+    it('Managers office number should populate if a manager is added to the team', () => {
+      const testOfficeNumber = "13";
+      const manager = new Manager("Augustine", 1, "augustine@email.com", testOfficeNumber);
+      expect(manager.officeNumber).toEqual(testOfficeNumber);
+    });
+  });
+});

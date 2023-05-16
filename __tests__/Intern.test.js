@@ -1,13 +1,13 @@
 const Intern = require("../lib/Intern")
 
-test("Check if intern is an object", () =>{
-  const newIntern = new Intern ()
-  expect (typeof(newIntern)).toBe("object")
-})
+//test to pass intern
+describe('Intern', () => {
 
-test ("Check if the name is saved correctly", () => {
-  const newIntern = new Intern ("Inez")
-  expect (newIntern.name).toBe("Inez")
-
-  
-})
+  describe('intern school', () => {
+    it('A school name should populate if a new intern is added to the team', () => {
+      const testSchool = "UNT";
+      const intern = new Intern("Betty", 1, "betty@email.com", testSchool);
+      expect(intern.school).toEqual(testSchool);
+    });
+  });
+});
