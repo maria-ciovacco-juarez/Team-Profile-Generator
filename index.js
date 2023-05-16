@@ -131,6 +131,6 @@ const questionsIntern = () => {
 
 const completeTeam = () => {
     console.log(`Team is complete`);
-    fs.writeFileSync('index.html', generateHTML(employees), "utf-8");
+    fs.writeFileSync('teams.html', generateHTML(employees), "utf-8");
 }
 questionsManager();
