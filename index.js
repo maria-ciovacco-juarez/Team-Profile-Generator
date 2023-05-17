@@ -78,22 +78,22 @@ const questionsManager = () => {
         {
             type: 'input',
             name: 'managerName',
-            message: 'Please enter the managers name.',
+            message: 'Please enter the manager\'s name:',
         },
         {
             type: 'input',
             name: 'managerID',
-            message: 'Please enter the managers employee ID',
+            message: 'Please enter the manager\'s employee ID:',
         },
         {
             type: 'input',
             name: 'managerEmail',
-            message: 'Please enter the managers email address',
+            message: 'Please enter the manager\'s email address:',
         },
         {
             type: 'input',
             name: 'managerOfficeNumber',
-            message: 'Please enter the managers office number',
+            message: 'Please enter the manager\'s office number:',
         },
 
     ]).then(answers => {
@@ -111,22 +111,22 @@ const questionsEngineer = () => {
         {
             type: 'input',
             name: 'engineerName',
-            message: 'Please enter the engineer\'s name.',
+            message: 'Please enter the engineer\'s name:',
         },
         {
             type: 'input',
             name: 'engineerID',
-            message: 'Please enter the engineer\'s ID',
+            message: 'Please enter the engineer\'s ID:',
         },
         {
             type: 'input',
             name: 'engineerEmail',
-            message: 'Please enter the engineer\'s email address',
+            message: 'Please enter the engineer\'s email address:',
         },
         {
             type: 'input',
             name: 'engineerGithub',
-            message: 'Please enter the engineer\'s github username',
+            message: 'Please enter the engineer\'s github username:',
         },
     ]).then(answers => {
         const engineer = new Engineer(answers.engineerName, answers.engineerID, answers.engineerEmail, answers.engineerGithub);
@@ -142,22 +142,22 @@ const questionsIntern = () => {
         {
             type: 'input',
             name: 'internName',
-            message: 'Please enter the interns name.',
+            message: 'Please enter the intern\'s name:',
         },
         {
             type: 'input',
             name: 'internID',
-            message: 'Please enter the interns ID',
+            message: 'Please enter the intern\'s ID:',
         },
         {
             type: 'input',
             name: 'internEmail',
-            message: 'Please enter the interns email address',
+            message: 'Please enter the intern\'s email address:',
         },
         {
             type: 'input',
             name: 'internSchool',
-            message: 'Please enter the interns school',
+            message: 'Please enter the intern\'s school:',
         },
     ]).then(answers => {
         const intern = new Intern(answers.internName, answers.internID, answers.internEmail, answers.internSchool);
@@ -170,7 +170,7 @@ const questionsIntern = () => {
 // Complete the bunch and generate the file
 const completeTeam = () => {
     console.log(`The Folklore Directory is ready!`);
-    fs.writeFileSync('teams.html', generateHTML(employees), "utf-8");
+    fs.writeFileSync('./dist/folklore.html', generateHTML(employees), "utf-8");
 }
 
 // Call promptMenu to start the process
