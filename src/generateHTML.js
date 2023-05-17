@@ -36,6 +36,8 @@ const generateHTML = team => {
     html.push(engineerHtml);
   };
 
+  // intern html
+
   const createIntern = intern => {
     let internHtml = ` 
     <div class="wrap">

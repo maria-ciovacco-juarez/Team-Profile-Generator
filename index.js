@@ -18,8 +18,8 @@ const employees = [];
 //   }
 // };
 
-//CLI array of questions
 
+// First set of prompts to populate
 const promptMenu = () => {
     return inquirer.prompt([
         {
@@ -45,6 +45,8 @@ const promptMenu = () => {
         });
 };
 
+// promptLore will populate after the first employee is added.
+
 const promptLore = () => {
     return inquirer.prompt([
         {
@@ -69,6 +71,8 @@ const promptLore = () => {
             }
         });
 };
+
+// questions for adding manager
 const questionsManager = () => {
     return inquirer.prompt([
         {
@@ -100,6 +104,8 @@ const questionsManager = () => {
 };
 
 
+// questions for adding engineer
+
 const questionsEngineer = () => {
     return inquirer.prompt([
         {
@@ -128,6 +134,8 @@ const questionsEngineer = () => {
         promptLore();
     })
 };
+
+// questions for adding intern
 
 const questionsIntern = () => {
     return inquirer.prompt([
