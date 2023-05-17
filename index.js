@@ -19,6 +19,56 @@ const employees = [];
 // };
 
 //CLI array of questions
+
+const promptMenu = () => {
+    return inquirer.prompt([
+        {
+            type: 'list',
+            name: 'newTeamMember',
+            message: 'Welcome to the Folklore directory! Who do you want to add to the troupe?',
+            choices: [ 'Manager', 'Engineer', 'Intern', 'The troupe is done!'] 
+        }])
+        .then(res => {
+            switch (res.newTeamMember) {
+                case "Manager":
+                    questionsManager();
+                    break;
+                case "Engineer":
+                    questionsEngineer();
+                    break;
+                case "Intern":
+                    questionsIntern();
+                    break;
+                default:
+                    completeTeam();
+            }
+        });
+};
+
+const promptLore = () => {
+    return inquirer.prompt([
+        {
+            type: 'list',
+            name: 'newTeamMember',
+            message: 'Done! Who else do you want to add to the Folklore world?',
+            choices: [ 'Manager', 'Engineer', 'Intern', 'The troupe is done!'] 
+        }])
+        .then(res => {
+            switch (res.newTeamMember) {
+                case "Manager":
+                    questionsManager();
+                    break;
+                case "Engineer":
+                    questionsEngineer();
+                    break;
+                case "Intern":
+                    questionsIntern();
+                    break;
+                default:
+                    completeTeam();
+            }
+        });
+};
 const questionsManager = () => {
     return inquirer.prompt([
         {
@@ -45,58 +95,37 @@ const questionsManager = () => {
     ]).then(answers => {
         const manager = new Manager(answers.managerName, answers.managerID, answers.managerEmail, answers.managerOfficeNumber)
         employees.push(manager);
-        promptMenu()
+        promptLore()
     })
 };
 
-const promptMenu = () => {
-    return inquirer.prompt([
-        {
-            type: 'list',
-            name: 'newTeamMember',
-            message: 'Do you want to add a new team member to your team?',
-            choices: ['Engineer', 'Intern', 'My team is complete'] 
-        }])
-        .then(res => {
-            switch (res.newTeamMember) {
-                case "Engineer":
-                    questionsEngineer();
-                    break;
-                case "Intern":
-                    questionsIntern();
-                    break;
-                default:
-                    completeTeam();
-            }
-        });
-};
 
 const questionsEngineer = () => {
     return inquirer.prompt([
         {
             type: 'input',
             name: 'engineerName',
-            message: 'Please enter the engineers name.',
+            message: 'Please enter the engineer\'s name.',
         },
         {
             type: 'input',
             name: 'engineerID',
-            message: 'Please enter the engineers ID',
+            message: 'Please enter the engineer\'s ID',
         },
         {
             type: 'input',
             name: 'engineerEmail',
-            message: 'Please enter the engineers email address',
+            message: 'Please enter the engineer\'s email address',
         },
         {
             type: 'input',
             name: 'engineerGithub',
-            message: 'Please enter the engineers github username',
+            message: 'Please enter the engineer\'s github username',
         },
     ]).then(answers => {
         const engineer = new Engineer(answers.engineerName, answers.engineerID, answers.engineerEmail, answers.engineerGithub);
         employees.push(engineer);
-        promptMenu();
+        promptLore();
     })
 };
 
@@ -125,12 +154,16 @@ const questionsIntern = () => {
     ]).then(answers => {
         const intern = new Intern(answers.internName, answers.internID, answers.internEmail, answers.internSchool);
         employees.push(intern);
-        promptMenu();
+        promptLore();
     })
 };
 
+
+// Complete the bunch and generate the file
 const completeTeam = () => {
-    console.log(`Team is complete`);
+    console.log(`The Folklore Directory is ready!`);
     fs.writeFileSync('teams.html', generateHTML(employees), "utf-8");
 }
-questionsManager();
+
+// Call promptMenu to start the process
+promptMenu();

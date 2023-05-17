@@ -3,8 +3,8 @@ const generateHTML = team => {
   //manager html section
   const createManager = manager => {
     let managerHtml = ` 
-    <div class="column">
-        <div class="card">
+    <div class="wrap">
+        <div class="box one">
             <div class="container">
                 <h2>${manager.getName()}</h2>
                 <h3>Title: ${manager.getRole()}</h3>
@@ -21,12 +21,12 @@ const generateHTML = team => {
   //engineer html section
   const createEngineer = engineer => {
     let engineerHtml = ` 
-    <div class="column">
-        <div class="card">
+    <div class="wrap">
+        <div class="box one">
             <div class="container">
-                <h2>${engineer.getName()}</h2>
-                <h3>Title: ${engineer.getRole()}</h3>
-                <p>Employee ID: ${engineer.getId()}</p>
+                <h2>${engineer.getName() }</h2>
+                <h3>Title: ${engineer.getRole()} </h3>
+                <p>Employee ID: ${engineer.getId()} </p>
                 <p>Email: <a href="mailto:${engineer.getEmail()}">${engineer.getEmail()}</a></p>
                 <p>GitHub: <a href="https://github.com/${engineer.getGithub()}" target="_blank">${engineer.getGithub()}</a></p>  
             </div>
@@ -38,8 +38,8 @@ const generateHTML = team => {
 
   const createIntern = intern => {
     let internHtml = ` 
-    <div class="column">
-        <div class="card">
+    <div class="wrap">
+        <div class="box one">
             <div class="container">
                 <h2>${intern.getName()}</h2>
                 <h3>Title: ${intern.getRole()}</h3>
@@ -75,11 +75,11 @@ module.exports = team => {
       <meta charset="UTF-8" />
       <meta http-equiv="X-UA-Compatible" content="IE=edge" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>My Team Directory</title>
+      <title>The Folklore Bunch</title>
       <link rel="stylesheet" href="./dist/style.css"/>
     </head>
     <body>
-      <h1>My Team Directory</h1>
+      <h1>The Folklore Bunch</h1>
 
       <div class="column">
       <div class="card">
