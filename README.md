@@ -9,6 +9,8 @@ Here you'll find the code and files that you will be able to clone to your local
 
 ## Installation
 
+-- Have a good browser. I recommend Chrome.
+
 -- Clone this repository to your local machine.
 
 -- Navigate into the folder with the command `cd Team-Profile-Generator` and hit enter(Windows) or return(MacOS).
