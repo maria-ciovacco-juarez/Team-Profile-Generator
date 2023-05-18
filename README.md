@@ -36,8 +36,11 @@ Here you'll find the code and files that you will be able to clone to your local
 
 -- When you're done select "The troupe is done!"
 
--- the new folklore.html file will automatically generate in the `/dist` folder. Here's a view of the final version:
+-- the new folklore.html file will automatically generate in the `/dist` folder. Pictures of the final version is below. You can also access the demo html with this deployed link.**
 
+**Note that the example html in the project is called `index.html` and is separate from `folklore.html` inside of `/dist `. 
+
+Deployed link: https://maria-ciovacco-juarez.github.io/Team-Profile-Generator/
 
 
 <img width="1508" alt="Screen Shot 2023-05-18 at 2 29 39 PM" src="https://github.com/maria-ciovacco-juarez/Team-Profile-Generator/assets/119270869/d3eeda66-5e98-4871-b3b7-b4f7c1d5dbba">
