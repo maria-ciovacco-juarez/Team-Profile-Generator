@@ -7,6 +7,7 @@ const generateHTML = team => {
         <div class="box one">
             <div class="container">
                 <h2>${manager.getName()}</h2>
+                <section>
                 <h3>Title: ${manager.getRole()}</h3>
                 <p>Employee ID: ${manager.getId()}</p>
                 <p>Email: <a href="mailto:${manager.getEmail()}">${manager.getEmail()}</a></p>
@@ -25,6 +26,7 @@ const generateHTML = team => {
         <div class="box one">
             <div class="container">
                 <h2>${engineer.getName() }</h2>
+                <section>
                 <h3>Title: ${engineer.getRole()} </h3>
                 <p>Employee ID: ${engineer.getId()} </p>
                 <p>Email: <a href="mailto:${engineer.getEmail()}">${engineer.getEmail()}</a></p>
@@ -44,6 +46,7 @@ const generateHTML = team => {
         <div class="box one">
             <div class="container">
                 <h2>${intern.getName()}</h2>
+                <section>
                 <h3>Title: ${intern.getRole()}</h3>
                 <p>Employee ID: ${intern.getId()}</p>
                 <p>Email: <a href="mailto:${intern.getEmail()}">${intern.getEmail()}</a></p>
