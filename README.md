@@ -17,9 +17,9 @@ Here you'll find the code and files that you will be able to clone to your local
 
 -- You shouldn't have to install node_modules, but if given any issues you can install them using the integrated command line in VSCode by entering `npm install`.
 
--- You will need to install `Inquirer` and `Jest`. 
+-- You will need to install `Inquirer` and `Jest` via the command line in the integrated terminal. 
 
-  -- the command to install `Inquirer` is enter `npm i inquirer`.
+  -- the command to install `Inquirer` is `npm i inquirer`.
 
   -- Install `jest` by entering `npm i jest`.
 
