@@ -36,7 +36,7 @@ Here you'll find the code and files that you will be able to clone to your local
 
 -- When you're done select "The troupe is done!"
 
--- the new folklore.html file will automatically generate in the `/dist` folder. Pictures of the final version is below. You can also access the demo html with this deployed link.**
+-- the new `folklore.html` file will automatically generate in the `/dist` folder. Pictures of the final version is below. You can also access the demo html with this deployed link.**
 
 **Note that the example html in the project is called `index.html` and is separate from `folklore.html` inside of `/dist `. 
 
