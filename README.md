@@ -37,6 +37,12 @@ Here you'll find the code and files that you will be able to clone to your local
 
 
 
+<img width="1508" alt="Screen Shot 2023-05-18 at 2 29 39 PM" src="https://github.com/maria-ciovacco-juarez/Team-Profile-Generator/assets/119270869/d3eeda66-5e98-4871-b3b7-b4f7c1d5dbba">
+
+
+<img width="1496" alt="Screen Shot 2023-05-18 at 2 29 42 PM" src="https://github.com/maria-ciovacco-juarez/Team-Profile-Generator/assets/119270869/9eda9272-0aa1-468f-acd9-c381f6aff9b8">
+
+
 
 
 
@@ -70,5 +76,7 @@ SOFTWARE.
 ## Credits
 
 -- https://codepen.io/ZaynAlaoudi/pen/yEQBbN was used for CSS styling (free)
+
 -- Tutors
+
 -- ChatGPT for syntax errors
